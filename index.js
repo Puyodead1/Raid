@@ -18,7 +18,9 @@ client.on("ready", () => {
       if (unban) {
         guild.fetchBans().then(bans => {
           bans.forEach(ban => {
-            guild.unban(ban);
+            guild.unban(ban).then(() => {
+              console.log(ban.username);
+            });
           });
         });
       }
